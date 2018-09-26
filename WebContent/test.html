@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$.ajax({
+    url:"http://localhost:8081/WebTest/helloWord/hw.do",    //请求的url地址
+    dataType:"json",   //返回格式为json
+    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+    data:{"id":"value"},    //参数值
+    type:"GET",   //请求方式
+    success:function(req){
+    	console.log(req.name);
+    	console.log(req.passWord);
+        alert("成功");
+        $('#password').val(req.passWord);
+        $('#name').val(req.name);
+    },
+    error:function(){
+        //请求出错处理
+        alert("错误");
+    }
+});
+
+</script>
+<title>Test</title>
+</head>
+<body>
+<input type = "text" id ="password">
+<input type = "text" id = "name">
+</body>
+</html>

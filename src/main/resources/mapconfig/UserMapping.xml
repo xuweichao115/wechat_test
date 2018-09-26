@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webService.mapperInterface.IUser">
+<resultMap id="userResult" type="com.webService.entity.UsersEntity">  
+    <id property="ID" column="user_id" />  
+    <result property="name" column="user" />  
+    <result property="passWord" column="passWord" />  
+</resultMap> 
+	<select id="selectUserInfo" resultMap="userResult">
+		select * from user 
+	</select>
+	
+	<update id="updataUserInfo" parameterType="com.webService.entity.UsersEntity">
+		update loginuser.user set  password=#{passWord} where user=#{name}
+	</update>
+</mapper>
+

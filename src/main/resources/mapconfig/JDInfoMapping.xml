@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webService.mapperInterface.IjdInfo">
+<resultMap id="userResult" type="com.webService.entity.JDInfoEntity">  
+    <id property="id" column="jd_info" />  
+    <result property="code" column="code" />  
+    <result property="token" column="token" />  
+    <result property="expires_in" column="expires_in" />  
+    <result property="time" column="time" />  
+    <result property="uid" column="uid" />  
+    <result property="user_nick" column="user_nick" />  
+    <result property="venderId" column="venderId" />  
+    <result property="ins_date" column="ins_date" />  
+</resultMap> 
+	<insert id="insertJdInfo" parameterType="com.webService.entity.JDInfoEntity">
+		INSERT INTO jdinfo(code,token,expires_in,time,uid,user_nick,venderId,ins_date) value (#{code},#{token},#{expires_in},#{time},#{uid},#{user_nick},#{venderId},#{ins_date});
+	</insert>
+	
+	<select id="findJdInf" resultMap="userResult">
+		SELECT * FROM jd.jdinfo i   ORDER BY i.ins_date DESC LIMIT 1
+	</select>
+</mapper>
+
