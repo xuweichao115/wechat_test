@@ -8,58 +8,50 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.utility.Log;
+import com.utility.TypeConversionUtility;
 import com.webService.entity.UsersEntity;
 import com.webService.mapperInterface.IUser;
 
 @Controller
 @RequestMapping("/helloWord")
-public class HelloWord extends Log {
+public class HelloWord{
 	@Autowired
 	private IUser IUser;
 
 	@RequestMapping("hw.do")
 	public void HelloWord(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		try {
 			UsersEntity user = new UsersEntity();
 			user.setName("ssss");
 			user.setPassWord("111111");
-			System.out.println("服务端返回成功！");
-			String userJson = ObjToJson(user);
+//			System.out.println("服务端返回成功！");
+			String userJson = TypeConversionUtility.ObjToJson(user);
 			System.out.println("输出Json格式数据:" + userJson);
 			List<UsersEntity> us = IUser.selectUserInfo();
-			getLogger().logger.error("服务端异常");
+//			getLogger().logger.error("服务端异常");
 			for (UsersEntity s : us) {
 				System.out.println("用户名:" + s.getName() + "用户密码：" + s.getPassWord());
 			}
 			response.getWriter().write(userJson);
-		} catch (Exception e) {
-			getLogger().logger.error("服务端异常", e);
-		}
-
 	}
 
 	@RequestMapping("hw2.do")
 	@ResponseBody
-	public List<UsersEntity> HelloWord2(HttpServletRequest request, HttpServletResponse response) {
-		List<UsersEntity> us = null;
-			String username = request.getParameter("username");
-			String pad = request.getParameter("pad");
+	public List<UsersEntity> HelloWord2 (@RequestBody UsersEntity user ) {
+			List<UsersEntity> us = null;
+			String username = user.getName();
+			String pad = user.getPassWord();
 			System.out.println(pad);
 			System.out.println(username);
-			 PageHelper.startPage(1, 10);
-			try{
-				us=IUser.selectUserInfo();
-			} catch (Exception e) {
-			getLogger().logger.error("服务端异常", e);	
-			}
-		return us;
+			PageHelper.startPage(1, 10);
+			us=IUser.selectUserInfo();
+			return us;
 	}
 	
 	
