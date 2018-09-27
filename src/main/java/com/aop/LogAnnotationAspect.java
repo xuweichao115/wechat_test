@@ -15,14 +15,18 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
+
+
 
 @Aspect
 @Component
-@Log4j
+@Slf4j
 public class LogAnnotationAspect {
 	
-	 @Pointcut("execution(* com.webService.HelloWord.HelloWord2(..))")
+	 @Pointcut("execution(* com.modular.*.*.*(..))")
 	 public void webLog() {
+		 System.out.println("开启AOP注解");
 	 }
 	 
 	 @Before("webLog()")

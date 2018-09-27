@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.webService.mapperInterface.IjdInfo">
-<resultMap id="userResult" type="com.webService.entity.JDInfoEntity">  
+
+<mapper namespace="com.modular.test.dao.JdInfoDao">
+<resultMap id="userResult" type="com.modular.test.entity.JDInfoEntity">  
     <id property="id" column="jd_info" />  
     <result property="code" column="code" />  
     <result property="token" column="token" />  
@@ -12,7 +13,7 @@
     <result property="venderId" column="venderId" />  
     <result property="ins_date" column="ins_date" />  
 </resultMap> 
-	<insert id="insertJdInfo" parameterType="com.webService.entity.JDInfoEntity">
+	<insert id="insertJdInfo" parameterType="com.modular.test.entity.JDInfoEntity">
 		INSERT INTO jdinfo(code,token,expires_in,time,uid,user_nick,venderId,ins_date) value (#{code},#{token},#{expires_in},#{time},#{uid},#{user_nick},#{venderId},#{ins_date});
 	</insert>
 	

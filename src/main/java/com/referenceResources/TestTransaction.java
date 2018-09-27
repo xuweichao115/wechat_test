@@ -1,4 +1,4 @@
-package com.webService;
+package com.referenceResources;
 
 public class TestTransaction {
 

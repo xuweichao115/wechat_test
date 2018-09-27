@@ -1,24 +1,23 @@
-package com.webService;
+package com.referenceResources;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 public class Jdbc {
 	static String driver = "com.mysql.jdbc.Driver";
-	static String url = "jdbc:mysql://localhost:3306/loginuser";
-	static String username = "root";
+	static String url = "jdbc:mysql://localhost:3306/wechat";
+	static String username = "xwc";
 	static String password = "123456";
 	static Connection initConn = null;
 
 	static {
 		try {
 			Class.forName(driver);
-			initConn = (Connection) DriverManager.getConnection(url, username,
-					password);
+			initConn = (Connection) DriverManager.getConnection(url, username, password);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,6 +53,9 @@ public class Jdbc {
 		}
 	}
 	
-	
+	public static void main(String[] args) {
+		Jdbc jdbc = new Jdbc();
+		jdbc.query();
+	}
 
 }

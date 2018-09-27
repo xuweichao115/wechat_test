@@ -1,9 +1,11 @@
-package com.webService.mapperInterface;
+package com.modular.test.dao;
 
-import com.webService.entity.JDInfoEntity;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.referenceResources.entity.JDInfoEntity;
 
-public interface IjdInfo {
+@Mapper
+public interface JdInfoDao {
 	
 	/**
 	 * 保存京东Token信息

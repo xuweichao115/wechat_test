@@ -1,4 +1,4 @@
-package com.webService.entity;
+package com.referenceResources.entity;
 
 import lombok.Data;
 

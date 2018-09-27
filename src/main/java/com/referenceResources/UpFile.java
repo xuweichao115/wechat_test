@@ -1,14 +1,13 @@
-package com.webService;
+package com.referenceResources;
 
-public class main1{
+public class UpFile {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Jdbc j = new Jdbc();
-		j.query();
+
 	}
 
 }

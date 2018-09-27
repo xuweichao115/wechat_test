@@ -3,11 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" 
-	xmlns:jaxws="http://cxf.apache.org/jaxws"
-    xmlns:jaxrs="http://cxf.apache.org/jaxrs" 
-    xmlns:cxf="http://cxf.apache.org/core" 
-    xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context     
@@ -21,17 +19,16 @@
     http://cxf.apache.org/jaxws 
     http://cxf.apache.org/schemas/jaxws.xsd">
 	<!-- 扫描类包，将标注Spring注解的类自动转化Bean，同时完成Bean的注入 -->
-	<context:component-scan base-package="com" />
-	
+	<context:component-scan base-package="com.*" />
+
 	<mvc:annotation-driven />
-
-
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsp/" />
 		<property name="suffix" value=".jsp" />
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
 	</bean>
 
 	<bean id="messageAdapter"
@@ -63,8 +60,7 @@
 	</tx:advice>
 	<!-- 开启AOP注解 -->
 	<bean id="logAspectBean" class=" com.aop.LogAnnotationAspect"></bean>
-	 <aop:config>
-	  <aop:aspect id="aspect" ref="logAspectBean">
-	  </aop:aspect>
-	</aop:config>
+	<!--2、开启基于注解的aop功能  -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
 </beans>
