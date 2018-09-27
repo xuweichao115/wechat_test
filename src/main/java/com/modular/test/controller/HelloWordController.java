@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.modular.test.dao.UserDao;
+import com.modular.test.form.UserForm;
 import com.referenceResources.entity.UsersEntity;
 import com.utility.TypeConversionUtility;
 
@@ -41,20 +42,18 @@ public class HelloWordController{
 			response.getWriter().write(userJson);
 	}
 
+	/**
+	 * 分页查询
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping("hw2.do")
 	@ResponseBody
-	public List<UsersEntity> HelloWord2 (@RequestBody UsersEntity user) {
-			int pageNum = user.getPageNum();
-		    //每页的数量
-			int pageSize = user.getPageSize();
-			System.out.println("返回页面："+pageNum + "" +pageSize);
-			String username = user.getName();
-//			PageHelper.startPage(user.getPageSize(),user.getPageNum());
-			String pad = user.getPassWord();
-			System.out.println(pad);
-			System.out.println(username);
-			List<UsersEntity> us=userdao.selectUserInfo();
-			return us;
+	public PageInfo<UsersEntity> HelloWord2 (@RequestBody UserForm user) {
+			user.getPage4Dao();
+			List<UsersEntity> us = userdao.selectUserInfo();
+			PageInfo<UsersEntity> pageInfo = new PageInfo<>(us);
+			return pageInfo;
 	}
 	
 	

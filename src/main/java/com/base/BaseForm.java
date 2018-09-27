@@ -49,7 +49,6 @@ public abstract class BaseForm<T>{
     
     Page<T> helper;
     
-    
     /**
      * mybatisplus 分页器
      *
@@ -58,7 +57,7 @@ public abstract class BaseForm<T>{
     public Page<T> getPage4Dao() {
         if (helper == null) {
         	new PageHelper();
-			helper = PageHelper.startPage(getPageNum(), getSize());
+			helper = PageHelper.startPage(getPageNum(),getPageSize());
         }
         return helper;
     }
