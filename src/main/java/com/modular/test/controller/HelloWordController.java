@@ -1,13 +1,14 @@
 package com.modular.test.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.modular.test.dao.UserDao;
 import com.modular.test.entity.UsersEntity;
+import com.modular.test.form.UserForm;
 import com.redis.RedisUtil;
+import com.utility.TypeConversionUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.modular.test.dao.UserDao;
-import com.modular.test.form.UserForm;
-import com.utility.TypeConversionUtility;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequestMapping("/helloWord")
@@ -51,11 +50,12 @@ public class HelloWordController{
 	 */
 	@RequestMapping("/hw2.do")
 	@ResponseBody
+    @Cacheable(value="userInfo")
 	public PageInfo<UsersEntity> HelloWord2 (@RequestBody UserForm user) {
 			user.getPage4Dao();
 			List<UsersEntity> us = userdao.selectUserInfo();
-			redisCache.setList("userInfo",us);
-			System.out.println(redisCache.getList("userInfo"));
+			//加入缓存
+            redisCache.setList("userInfo",us);
 			PageInfo<UsersEntity> pageInfo = new PageInfo<>(us);
 			return pageInfo;
 	}
