@@ -4,5 +4,5 @@ application/x-www-form-urlencoded， 可选（即非必须，因为这种情况�
 multipart/form-data, 不能处理（即使用@RequestBody不能处理这种格式的数据）；  其他格式， 必须（其他格式包括application/json, application/xml等。这些格式的数据，必须使用@RequestBody来处理）；
 
 ######2.使用@Data注解
-Lombok是一个通过注解以达到减少代码的Java库,如通过注解的方式减少get,set方法,构造方法等。
+Lombok是一个通过注解以达到减少代码的Java库,如通过注解的方式减少get,set方法,构造方法等。   
 

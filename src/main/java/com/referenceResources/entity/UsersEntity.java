@@ -1,13 +1,11 @@
 package com.referenceResources.entity;
 
-import com.base.BaseForm;
-
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class UsersEntity extends BaseForm<UsersEntity>{
+public class UsersEntity implements Serializable {
 	private String name;
 	private String passWord;
-	private String ID;
-	
 }

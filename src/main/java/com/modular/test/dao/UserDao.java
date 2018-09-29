@@ -2,9 +2,9 @@ package com.modular.test.dao;
 
 import java.util.List;
 
+import com.modular.test.entity.UsersEntity;
 import org.apache.ibatis.annotations.Mapper;
 
-import com.referenceResources.entity.UsersEntity;
 
 @Mapper
 public interface UserDao {

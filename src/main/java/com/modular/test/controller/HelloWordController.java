@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.modular.test.entity.UsersEntity;
+import com.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,7 +19,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.modular.test.dao.UserDao;
 import com.modular.test.form.UserForm;
-import com.referenceResources.entity.UsersEntity;
 import com.utility.TypeConversionUtility;
 
 @Controller
@@ -26,16 +27,17 @@ public class HelloWordController{
 	@Autowired
 	private UserDao userdao;
 
-	@RequestMapping("hw.do")
+	@Autowired
+	private RedisUtil redisCache;
+
+	@RequestMapping("/hw.do")
 	public void HelloWord(HttpServletRequest request, HttpServletResponse response) throws Exception {
 			UsersEntity user = new UsersEntity();
 			user.setName("ssss");
 			user.setPassWord("111111");
-//			System.out.println("服务端返回成功！");
 			String userJson = TypeConversionUtility.ObjToJson(user);
 			System.out.println("输出Json格式数据:" + userJson);
 			List<UsersEntity> us = userdao.selectUserInfo();
-//			getLogger().logger.error("服务端异常");
 			for (UsersEntity s : us) {
 				System.out.println("用户名:" + s.getName() + "用户密码：" + s.getPassWord());
 			}
@@ -47,17 +49,19 @@ public class HelloWordController{
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping("hw2.do")
+	@RequestMapping("/hw2.do")
 	@ResponseBody
 	public PageInfo<UsersEntity> HelloWord2 (@RequestBody UserForm user) {
 			user.getPage4Dao();
 			List<UsersEntity> us = userdao.selectUserInfo();
+			redisCache.setList("userInfo",us);
+			System.out.println(redisCache.getList("userInfo"));
 			PageInfo<UsersEntity> pageInfo = new PageInfo<>(us);
 			return pageInfo;
 	}
 	
 	
-	@RequestMapping("hw3.do")
+	@RequestMapping("/hw3.do")
 	@ResponseBody
 	public void TestTransaction(HttpServletRequest request, HttpServletResponse response) {
 		UsersEntity user = new UsersEntity();
@@ -66,7 +70,7 @@ public class HelloWordController{
 		userdao.updataUserInfo(user);
 	}
 
-	@RequestMapping(value = "hw4.do")
+	@RequestMapping(value = "/hw4.do")
 	public ModelAndView reJsp(ModelMap model, Integer page) {
 		page = page != null ? page : 1;
 		PageHelper.startPage(page, 3);
