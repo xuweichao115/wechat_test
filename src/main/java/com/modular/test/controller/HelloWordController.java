@@ -27,7 +27,7 @@ public class HelloWordController{
 	private UserDao userdao;
 
 	@Autowired
-	private RedisUtil redisCache;
+	private RedisUtil redisUtil;
 
 	@RequestMapping("/hw.do")
 	public void HelloWord(HttpServletRequest request, HttpServletResponse response) throws Exception {
