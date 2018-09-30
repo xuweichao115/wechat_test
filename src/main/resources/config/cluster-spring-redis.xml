@@ -23,26 +23,26 @@
                         <constructor-arg name="host" value="${redis.host1}"/>
                         <constructor-arg name="port" value="${redis.port1}"/>
                     </bean>
-                    <bean class="org.springframework.data.redis.connection.RedisNode">
-                        <constructor-arg name="host" value="${redis.host2}"/>
-                        <constructor-arg name="port" value="${redis.port2}"/>
-                    </bean>
-                    <bean class="org.springframework.data.redis.connection.RedisNode">
-                        <constructor-arg name="host" value="${redis.host3}"/>
-                        <constructor-arg name="port" value="${redis.port3}"/>
-                    </bean>
-                    <bean class="org.springframework.data.redis.connection.RedisNode">
-                        <constructor-arg name="host" value="${redis.host4}"/>
-                        <constructor-arg name="port" value="${redis.port4}"/>
-                    </bean>
-                    <bean class="org.springframework.data.redis.connection.RedisNode">
-                        <constructor-arg name="host" value="${redis.host5}"/>
-                        <constructor-arg name="port" value="${redis.port5}"/>
-                    </bean>
-                    <bean class="org.springframework.data.redis.connection.RedisNode">
-                        <constructor-arg name="host" value="${redis.host6}"/>
-                        <constructor-arg name="port" value="${redis.port6}"/>
-                    </bean>
+                    <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                        <!--<constructor-arg name="host" value="${redis.host2}"/>-->
+                        <!--<constructor-arg name="port" value="${redis.port2}"/>-->
+                    <!--</bean>-->
+                    <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                        <!--<constructor-arg name="host" value="${redis.host3}"/>-->
+                        <!--<constructor-arg name="port" value="${redis.port3}"/>-->
+                    <!--</bean>-->
+                    <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                        <!--<constructor-arg name="host" value="${redis.host4}"/>-->
+                        <!--<constructor-arg name="port" value="${redis.port4}"/>-->
+                    <!--</bean>-->
+                    <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                        <!--<constructor-arg name="host" value="${redis.host5}"/>-->
+                        <!--<constructor-arg name="port" value="${redis.port5}"/>-->
+                    <!--</bean>-->
+                    <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                        <!--<constructor-arg name="host" value="${redis.host6}"/>-->
+                        <!--<constructor-arg name="port" value="${redis.port6}"/>-->
+                    <!--</bean>-->
                 </set>
             </property>
         </bean>
