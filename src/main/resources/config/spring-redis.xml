@@ -1,12 +1,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-    http://www.springframework.org/schema/cache
-    http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-<!--加载配置文件-->
+    <!--加载配置文件-->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 
         <property name="maxIdle" value="${redis.maxIdle}"></property>
@@ -26,17 +23,31 @@
     <bean id="jedisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="jedisConnectionFactory"></property>
         <property name="keySerializer">
-            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
         </property>
         <property name="valueSerializer">
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
         </property>
     </bean>
 
+
+
+
     <!-- cache配置 -->
     <bean id="redisUtil" class="com.redis.RedisUtil" >
         <property name="redisTemplate" ref="jedisTemplate" />
         <property name="JedisConnectionFactory" ref="jedisConnectionFactory"/>
     </bean >
+
+    <bean id="cacheManager"   class="org.springframework.data.redis.cache.RedisCacheManager">
+        <!--配置 redisTemplate-->
+        <constructor-arg name="template" ref="jedisTemplate"/>
+        <!-- 过期时间 -->
+        <property name="defaultExpiration" value="300000"/>
+        <!--    支持事务 -->
+        <property name="transactionAware" value = "true"/>
+    </bean>
+
+    <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>
 
 </beans>

@@ -5,8 +5,8 @@
     <result property="name" column="user" />
     <result property="passWord" column="passWord" />  
 </resultMap> 
-	<select id="selectUserInfo" resultMap="userResult">
-		select * from user
+	<select id="selectUserInfo" parameterType="com.modular.test.form.UserForm" resultMap="userResult">
+		select * from user where user = #{userId}
 	</select>
 	
 	<update id="updataUserInfo" parameterType="com.modular.test.entity.UsersEntity">

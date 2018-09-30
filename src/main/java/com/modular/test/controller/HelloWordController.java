@@ -36,10 +36,10 @@ public class HelloWordController{
 			user.setPassWord("111111");
 			String userJson = TypeConversionUtility.ObjToJson(user);
 			System.out.println("输出Json格式数据:" + userJson);
-			List<UsersEntity> us = userdao.selectUserInfo();
-			for (UsersEntity s : us) {
-				System.out.println("用户名:" + s.getName() + "用户密码：" + s.getPassWord());
-			}
+//			List<UsersEntity> us = userdao.selectUserInfo();
+//			for (UsersEntity s : us) {
+//				System.out.println("用户名:" + s.getName() + "用户密码：" + s.getPassWord());
+//			}
 			response.getWriter().write(userJson);
 	}
 
@@ -50,12 +50,10 @@ public class HelloWordController{
 	 */
 	@RequestMapping("/hw2.do")
 	@ResponseBody
-    @Cacheable(value="userInfo")
+	@Cacheable(value = "userInfo",key = "#user.userId")
 	public PageInfo<UsersEntity> HelloWord2 (@RequestBody UserForm user) {
 			user.getPage4Dao();
-			List<UsersEntity> us = userdao.selectUserInfo();
-			//加入缓存
-            redisCache.setList("userInfo",us);
+			List<UsersEntity> us = userdao.selectUserInfo(user);
 			PageInfo<UsersEntity> pageInfo = new PageInfo<>(us);
 			return pageInfo;
 	}
@@ -75,10 +73,10 @@ public class HelloWordController{
 		page = page != null ? page : 1;
 		PageHelper.startPage(page, 3);
 		ModelAndView mad = new ModelAndView("test03");
-		List<UsersEntity> userList = userdao.selectUserInfo();
-		PageInfo<UsersEntity> pages = new PageInfo<UsersEntity>(userList);
-		mad.addObject("users", userList);
-		mad.addObject("page", pages);
+//		List<UsersEntity> userList = userdao.selectUserInfo();
+//		PageInfo<UsersEntity> pages = new PageInfo<UsersEntity>(userList);
+//		mad.addObject("users", userList);
+//		mad.addObject("page", pages);
 		return mad;
 	}
 

@@ -4,7 +4,9 @@ import com.base.BaseForm;
 
 import lombok.Data;
 
-@Data
-public class UserForm extends BaseForm{
+import java.io.Serializable;
 
+@Data
+public class UserForm extends BaseForm implements Serializable {
+    private String userId;
 }

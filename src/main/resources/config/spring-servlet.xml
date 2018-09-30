@@ -14,8 +14,10 @@
     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
     http://www.springframework.org/schema/mvc 
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-    <!-- 扫描多个类包，将标注Spring注解的类自动转化Bean，同时完成Bean的注入 -->
+    <!-- 扫描类包，将标注Spring注解的类自动转化Bean，同时完成Bean的注入 -->
     <context:component-scan base-package="com.modular.*"/>
+    <context:component-scan base-package="com.redis"/>
+
 
     <mvc:annotation-driven/>
 
